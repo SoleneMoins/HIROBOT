@@ -3,25 +3,24 @@
 #include <iostream>
 
 #include"position.h"
-#include"terrain.h"
 
-class joueur{
+class joueur {
 
 public:
     joueur();
     ~joueur();
-    joueur(std::string&nom,position pos,int score,int dureeVie);
+    joueur(std::string&nom,position* pos,int score,int dureeVie);
     position* positionJoueur()const;
     int score()const;
-   bool peutSeDeplacer(const position&p)const;
-    void deplacerVers(int numcol, int numligne,const terrain&tr);
+    bool peutSeDeplacer(const position&p)const;
+    void deplacerVers(int numcol, int numligne);
     void sauverJoueur(std::ostream&ost)const;
     void LireDepuis(std::istream&ost);
     int NombreRobotDetruit()const;
 
 private:
     std::string d_nom;
-    position*d_case;//la case ou se trouve le joueur
+    position*d_case;//la case où se trouve le joueur
     int d_score; //represente le nombre de robot detruit
     int d_dureeVie;
    int d_nbrobotdetruit;//est ce qu'on pouvait pas le supprimer?
