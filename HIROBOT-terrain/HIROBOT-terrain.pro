@@ -28,6 +28,7 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     position.cpp \
+    robot.cpp \
     terrain.cpp \
     joueur.cpp \
     grille.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     position.h \
+    robot.h \
     terrain.h \
     joueur.h \
     grille.h \
