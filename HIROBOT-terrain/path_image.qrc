@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>Images/debris.png</file>
+        <file>Images/explo.png</file>
+        <file>Images/hirobot2.png</file>
+        <file>Images/joueur.png</file>
+        <file>Images/robot1G.png</file>
+        <file>Images/robot2G.png</file>
+    </qresource>
+</RCC>

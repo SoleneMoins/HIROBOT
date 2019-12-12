@@ -32,7 +32,7 @@ void mainwindow::vueCreer(terrain&t){
 
     //Titre
     auto label = new QLabel{this};
-    QPixmap *logo = new QPixmap ("/Users/Neron/Desktop/hirobot2.png" );
+    QPixmap *logo = new QPixmap (":/Images/Images/hirobot2.png" );
     label->setPixmap(*logo);
 
 

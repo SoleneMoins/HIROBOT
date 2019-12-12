@@ -44,27 +44,27 @@ void grille::paintEvent(QPaintEvent *e)
 
             if(d_terrain.positionJoueur()->numLigne()==i && d_terrain.positionJoueur()->numColonne()==j && d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==1){
 
-                painter.drawImage(r1,QImage("/Users/Neron/Desktop/joueur.png"));
+                painter.drawImage(r1,QImage(":/Images/Images/joueur.png"));
 
             }
             if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==2){
 
-                painter.drawImage(r1,QImage("/Users/Neron/Desktop/robot1G.png"));
+                painter.drawImage(r1,QImage(":/Images/Images/robot1G.png"));
 
             }
             if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==3){
 
-                painter.drawImage(r1,QImage("/Users/Neron/Desktop/robot2G.png"));
+                painter.drawImage(r1,QImage(":/Images/Images/robot2G.png"));
 
             }
             if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==4){
 
-                painter.drawImage(r1,QImage("/Users/Neron/Desktop/debris.png"));
+                painter.drawImage(r1,QImage(":/Images/Images/debris.png"));
 
             }
             if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==5){
 
-                painter.drawImage(r1,QImage("/Users/Neron/Desktop/explo.png"));
+                painter.drawImage(r1,QImage(":/Images/Images/explo.png"));
 
             }
 
