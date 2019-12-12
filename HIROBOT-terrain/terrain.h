@@ -23,17 +23,21 @@ class terrain
      int nbRobot2G()const;
      joueur Joueur();
      std::vector<std::vector<int>> grille()const;
+     position* positionJoueur();
 
      void lireTerrain(const std::string&nomFichier); // charge un terrain
      void sauverTerrain(const std::string&nomFichier); // sauvegarde le terrain
      void changerTailleGrille(int nbligne, int nbcolonne); // change la taille de la grille
      void changerNb(int nbdebris,int nbRobot1G,int nbRobot2G); // change le nombre de débris et de robot
+     void changerPosJoueur(position*p); //Met à jour la position du joueur dans la grille
      void InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G); // initialise la grille de manière aléatoire
      void ChangerJoueur(joueur&j);
+     bool JoueurAPerdu();
      bool terrainOk();
 
 
      void afficheGrille(); // fonction test
+     void affichePositionJoueur(); //fonction test affichage
 
 
     private :

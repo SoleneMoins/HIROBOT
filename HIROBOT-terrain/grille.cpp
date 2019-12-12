@@ -42,7 +42,7 @@ void grille::paintEvent(QPaintEvent *e)
                  painter.fillRect(r1, brush2);
            }
 
-            if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==1){
+            if(d_terrain.positionJoueur()->numLigne()==i && d_terrain.positionJoueur()->numColonne()==j && d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==1){
 
                 painter.drawImage(r1,QImage("/Users/Neron/Desktop/joueur.png"));
 

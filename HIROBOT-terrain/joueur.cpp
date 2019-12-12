@@ -34,7 +34,7 @@ et on cherche si la position ou on veut se deplacer  est tdans cette zone
 
 */
 void joueur::deplacerVers(int numcol, int numligne){
-
+	 d_case = new position{numcol,numligne};
 }
 
 

@@ -18,9 +18,9 @@ terrain::terrain(int nbdebris,int nbrobotfirstG, int nbrobotsecondG, int nbligne
 
 void terrain::sauverTerrain(const std::string&nomFichier){
 
-   /* std::ofstream f (nomFichier, std::ofstream::out);
+    std::ofstream f (nomFichier, std::ofstream::out);
     f << d_joueur << "," << d_nbdebris << "," << d_nbrobotFirstG << "," << d_nbrobotSecondG << "," << d_nbligne << "," << d_nbcolonne;
-    f.close();*/
+    f.close();
 
 }
 
@@ -58,9 +58,13 @@ std::vector<std::vector<int>> terrain::grille()const{
 
 void terrain::lireTerrain(const std::string&nomFichier)
 {
-   /* std::ifstream f(nomFichier);
+    std::ifstream f(nomFichier);
     char c;
-    f >> d_nbdebris >> c >> d_nbrobotFirstG >> c >> d_nbrobotSecondG >> c >> d_nbligne >> c >> d_nbcolonne;*/
+    f >> d_nbdebris >> c >> d_nbrobotFirstG >> c >> d_nbrobotSecondG >> c >> d_nbligne >> c >> d_nbcolonne;
+}
+
+position* terrain::positionJoueur(){
+    return d_joueur.positionJoueur();
 }
 
 void terrain::changerTailleGrille (int nbligne, int nbcolonne){
@@ -106,7 +110,9 @@ void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
             d_grille[static_cast<unsigned>(i)][static_cast<unsigned>(j)] = nbalea;
 
             if(nbalea==0){++compteurZero;}
-            if(nbalea==1){++compteurJoueur;}
+            if(nbalea==1){
+                d_joueur.deplacerVers(j,i);
+                ++compteurJoueur;}
             if(nbalea==2){++compteurRobot1G;}
             if(nbalea==3){++compteurRobot2G;}
             if(nbalea==4){++compteurDebris;}
@@ -210,8 +216,35 @@ void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
 
 }
 
+void terrain::changerPosJoueur(position*p){
+
+
+
+         d_grille[static_cast<unsigned>(d_joueur.positionJoueur()->numLigne())][static_cast<unsigned>(d_joueur.positionJoueur()->numColonne())]=0;
+
+         if(d_grille[static_cast<unsigned>(p->numLigne())][static_cast<unsigned>(p->numColonne())]==4||d_grille[static_cast<unsigned>(p->numLigne())][static_cast<unsigned>(p->numColonne())]==3||d_grille[static_cast<unsigned>(p->numLigne())][static_cast<unsigned>(p->numColonne())]==2){
+              d_grille[static_cast<unsigned>(p->numLigne())][static_cast<unsigned>(p->numColonne())]=5;
+         }else{
+            d_grille[static_cast<unsigned>(p->numLigne())][static_cast<unsigned>(p->numColonne())]=1;
+         }
+
+         d_joueur.deplacerVers(p->numColonne(),p->numLigne());
+
+
+}
+
 void terrain::ChangerJoueur(joueur&j){
     d_joueur=j;
+}
+
+bool terrain::JoueurAPerdu(){
+
+    if(d_grille[static_cast<unsigned>(d_joueur.positionJoueur()->numLigne())][static_cast<unsigned>(d_joueur.positionJoueur()->numColonne())]==5){
+        return true;
+    }else{
+        return false;
+    }
+
 }
 
 
@@ -229,11 +262,6 @@ bool terrain::terrainOk(){
 }
 
 
-
-
-
-
-
 //Fonction test
 void terrain::afficheGrille(){
 
@@ -248,6 +276,12 @@ void terrain::afficheGrille(){
     }else{
         std::cout<<"T'as fait de la merde, recommence";
    }
+
+}
+
+void terrain::affichePositionJoueur(){
+
+    std::cout<<*positionJoueur()<<std::endl;
 
 }
 
