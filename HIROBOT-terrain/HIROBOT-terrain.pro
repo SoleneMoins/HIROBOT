@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    element.cpp \
         main.cpp \
         mainwindow.cpp \
     position.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
     personnaliserterrain.cpp
 
 HEADERS += \
+    element.h \
         mainwindow.h \
     position.h \
     terrain.h \
