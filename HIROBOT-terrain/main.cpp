@@ -1,9 +1,16 @@
-#include <iostream>
+#include "grille.h"
+#include "joueur.h"
+#include <QApplication>
+#include "mainwindow.h"
 
-using namespace std;
-
-int main()
+int main(int argc, char *argv[])
 {
-    cout << "Hello world!" << endl;
-    return 0;
+
+   terrain t;
+
+
+   QApplication app{argc,argv};
+    mainwindow f(t);
+    f.show();
+    app.exec();
 }

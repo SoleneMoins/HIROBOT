@@ -1,8 +1,8 @@
 #include"joueurExpert.h"
-joueurExpert::joueurExpert(position*p,const std::string&nom):joueur{p,nom} {}
+joueurExpert::joueurExpert(position*p,const std::string&nom, int score):joueur{p,nom, score} {}
 
 
-void joueurExpert::deplacer(int direction)
+/*void joueurExpert::deplacer(int direction)
 {
     switch (direction)
    {
@@ -21,4 +21,4 @@ void joueurExpert::deplacer(int direction)
     default:
         break;
    }
-}
+}*/

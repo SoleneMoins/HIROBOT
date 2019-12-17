@@ -6,9 +6,9 @@ class position;
 
 class joueurExpert:public joueur{
 public:
-    joueurExpert(position*p,const std::string&nom);
-    virtual void deplacer(int direction)override;
-     void deplaceHautDroite()=delete;
+    joueurExpert(position*p,const std::string&nom, int score);
+    //virtual void deplacer(int direction)override;
+    void deplaceHautDroite()=delete;
     void deplaceHautGauche()=delete;
     void deplaceBasDroit()=delete;
     void deplaceBasGauche()=delete;

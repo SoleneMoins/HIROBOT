@@ -35,9 +35,9 @@ void element::deplacerElementHaut(){
      d_pos->changerPosition(d_pos->numColonne(),d_pos->numLigne()-1);
 }
 
-std::ostream&operator<<(std::ostream&ost,const element&elem)
+/*std::ostream&operator<<(std::ostream&ost,const element&elem)
 {
     elem.sauver(ost);
     return ost;
 }
-
+*/
