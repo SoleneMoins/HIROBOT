@@ -31,7 +31,6 @@ private :
 
 
     void vueCreer();
-   // void vueAfficheTerrain();
    void paintEvent(QPaintEvent *e);
 
 

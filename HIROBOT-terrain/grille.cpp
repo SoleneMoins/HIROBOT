@@ -42,31 +42,34 @@ void grille::paintEvent(QPaintEvent *e)
                  painter.fillRect(r1, brush2);
            }
 
-            if(d_terrain.positionJoueur()->numLigne()==i && d_terrain.positionJoueur()->numColonne()==j && d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==1){
+            if(d_terrain.positionJoueur()->numLigne()==i && d_terrain.positionJoueur()->numColonne()==j){
 
                 painter.drawImage(r1,QImage(":/Images/Images/joueur.png"));
 
             }
-            if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==2){
 
-                painter.drawImage(r1,QImage(":/Images/Images/robot1G.png"));
+            for(int r=0;r<static_cast<int>(d_terrain.d_robot.size());++r){
 
-            }
-            if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==3){
 
-                painter.drawImage(r1,QImage(":/Images/Images/robot2G.png"));
+                                  if(d_terrain.d_robot[static_cast<unsigned>(r)]->positionElement()->numLigne()==i && d_terrain.d_robot[static_cast<unsigned>(r)]->positionElement()->numColonne()==j){
 
-            }
-            if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==4){
+                                           painter.drawImage(r1,QImage(":/Images/Images/robot"+QString::number(d_terrain.d_robot[r]->type()+1)+"G.png"));
 
-                painter.drawImage(r1,QImage(":/Images/Images/debris.png"));
+                                   }
 
-            }
-            if(d_terrain.grille()[static_cast<unsigned>(i)][static_cast<unsigned>(j)]==5){
 
-                painter.drawImage(r1,QImage(":/Images/Images/explo.png"));
+                         }
 
-            }
+
+              for(int r=0;r<d_terrain.nbDebris();++r){
+
+                   if(d_terrain.d_debris[static_cast<unsigned>(r)]->positionElement()->numLigne()==i && d_terrain.d_debris[static_cast<unsigned>(r)]->positionElement()->numColonne()==j){
+
+                                    painter.drawImage(r1,QImage(":/Images/Images/debris.png"));
+
+                          }
+
+               }
 
 
             painter.drawRect(r1);
