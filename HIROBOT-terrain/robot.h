@@ -11,5 +11,6 @@ public :
     virtual int type()const=0;
     void affichePosition()const;
 
+
 };
 #endif // ROBOT_H
