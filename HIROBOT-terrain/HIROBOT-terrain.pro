@@ -25,17 +25,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    debris.cpp \
+    element.cpp \
+    joueurExpert.cpp \
         main.cpp \
         mainwindow.cpp \
     position.cpp \
+    robot.cpp \
     terrain.cpp \
     joueur.cpp \
     grille.cpp \
     personnaliserterrain.cpp
 
 HEADERS += \
+    debris.h \
+    element.h \
+    joueurExpert.h \
         mainwindow.h \
     position.h \
+    robot.h \
     terrain.h \
     joueur.h \
     grille.h \

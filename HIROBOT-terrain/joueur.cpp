@@ -1,64 +1,146 @@
-#include "joueur.h"
+#include"joueur.h"
 
-joueur::joueur(): d_nom{}, d_case{nullptr}, d_score{0},d_dureeVie{0},d_nbrobotdetruit{0}
+joueur::joueur():element{nullptr},d_nom{},d_score{0},d_dureeVie{0}
 {}
 
-joueur::joueur(std::string&nom,position* pos,int score,int dureeVie):d_nom{nom},d_case{pos},d_score{score},d_dureeVie{dureeVie},d_nbrobotdetruit{0}
+joueur::joueur(position*p,const std::string&nom, int score):element{p},d_nom{nom},d_score{score},d_dureeVie{2}
 {}
-joueur::~joueur(){
-delete d_case;
-}
-    position*joueur::positionJoueur()const{
-
-    return d_case;
-}
 
 int joueur::score()const{
     return d_score;
 
 }
-bool joueur::peutSeDeplacer(const position&p)const{
-return((d_case->numLigne()-1<=p.numLigne())&&(p.numLigne()<=d_case->numLigne()+1)&&
-((d_case->numColonne()-1<=p.numColonne())&&(p.numColonne()<=d_case->numColonne()+1)));
-
-/*le petit terrain a pour coordonnées
-posiActel.ligne-1 et posiActel.ligne+1
-posiActel.col-1 posiActel.col+1
-et on cherche si la position ou on veut se deplacer  est tdans cette zone
-*/
-
-
-}
-
-/* Deplace le joueur à la place X si la position est dans la grille et s'il est autorisé à s'y deplacer
-
-*/
-void joueur::deplacerVers(int numcol, int numligne){
-	 d_case = new position{numcol,numligne};
-}
-
-
-
-void joueur::sauverJoueur(std::ostream&ost)const{
-
-    ost<<"("<<d_nom<<","<<d_case<<","<<d_score<<","<<d_dureeVie<<")";
+void joueur::sauverJoueur(std::ostream &ost) const{
+    ost<<"("<<d_nom<<","<<positionElement()<<","<<d_score<<","<<d_dureeVie<<")";
 }
 void joueur::LireDepuis(std::istream&ist){
-char c;
-ist>>c>>d_nom>>c;
-d_case->LireDepuis(ist);
-ist>>c>>d_score>>c>>d_dureeVie>>c;
+    char c;
+    ist>>c>>d_nom>>c;
+    positionElement()->LireDepuis(ist);
+    ist>>c>>d_score>>c>>d_dureeVie>>c;
 
 }
+void joueur::calculScore(){
+    d_score = d_dureeVie;
+}
 
-std::ostream& operator<<(std::ostream&ost, joueur& j){
-
-    j.sauverJoueur(ost);
-    return ost;
-
+void joueur::augmenterDureeVie(){
+    d_dureeVie++;
 }
 std::istream&operator>>(std::istream&ist,joueur&j){
 j.LireDepuis(ist);
 return ist;
 }
+std::ostream& operator<<(std::ostream&ost, joueur& j){
+    j.sauverJoueur(ost);
+    return ost;
+}
 
+/* bool joueur::estDansDebris(const debris&d)
+{
+      if(positionElement()->numLigne()==d.positionDebris().numLigne()&&
+         positionElement()->numColonne()==d.positionDebris().numColonne() )
+      {
+          diminuerDureeDeVie();
+          return true;
+      }
+      else
+      {
+          return false;
+      }
+
+}
+bool joueur::isDead()const
+{
+    return (d_dureeVie==0);
+
+}
+
+std::string joueur::nomJoueur()const{
+return d_nom;
+}
+
+
+void joueur:: deplacer(int direction)
+{
+switch (direction)
+   {
+    case 1:
+        deplacerElementHaut();
+        augmenterScore();
+        break;
+    case -1:
+        deplacerElementBas();
+        augmenterScore();
+        break;
+    case 2:
+        deplacerElementDroite();
+        augmenterScore();
+        break;
+    case -2:
+         deplacerElementGauche();
+         augmenterScore();
+         break;
+    case 3:
+           deplaceHautDroite();
+           augmenterScore();
+           break;
+    case -3:
+           deplaceHautGauche();
+           augmenterScore();
+           break;
+    case 4:
+           deplaceBasDroit();
+           augmenterScore();
+           break;
+    case -4:
+        deplaceBasGauche();
+        augmenterScore();
+        break;
+    default:
+        break;
+       // return;
+   }
+
+}
+
+void joueur::deplaceHautDroite()
+{
+   deplacerElementHaut();
+   deplacerElementDroite();
+}
+
+void joueur::deplaceHautGauche()
+{
+    deplacerElementHaut();
+    deplacerElementGauche();
+}
+
+void joueur::deplaceBasDroit()
+{
+  deplacerElementBas();
+  deplacerElementDroite();
+
+}
+
+void joueur::deplaceBasGauche()
+{
+   deplacerElementBas();
+    deplacerElementGauche();
+}
+
+
+ void joueur::sauver(std::ostream&ost)const{
+
+    ost<<"("<<d_nom<<","<<positionElement()<<","<<d_score<<","<<d_dureeVie<<")";
+}
+void diminuerDureeDeVie()
+{
+    if(d_dureeVie>=1)
+      d_dureeVie--;
+}
+void joueur::calculScore(){
+    d_score = d_dureeVie; //si ils sont egaux, pourquoi garder les deux?
+}
+
+*/

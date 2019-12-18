@@ -1,17 +1,16 @@
 #ifndef ROBOT_H
 #define ROBOT_H
-#include "position.h"
 #include "joueur.h"
 
-class robot {
+class robot : public element {
 public :
+	robot();
     robot(position*p);
-    position*positionRobot() const;
-    bool detecterJoueur(const joueur&j)const;
-    void deplacerRobot(const joueur&j);
-    void deplacerRobotAuHasard();
+    virtual ~robot();
+    virtual void deplacerRobot(const joueur&j) = 0;
+    virtual int type()const=0;
+    void affichePosition()const;
 
-private :
-    position*d_case;
+
 };
 #endif // ROBOT_H

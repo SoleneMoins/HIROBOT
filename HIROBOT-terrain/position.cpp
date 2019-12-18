@@ -1,23 +1,19 @@
 #include "position.h"
 
-position::position():d_numColonne{0},d_numLigne{0}
-{}
+#include "position.h"
 
-position::position(int col,int lig):d_numColonne{col},d_numLigne{lig}
-{}
+position::position():d_numLigne{0},d_numColonne{0} {}
 
-int position::numColonne()const{
-    return d_numColonne;
-}
+position::position(int ligne,int colonne):d_numLigne{ligne},d_numColonne{colonne} {}
 
-int position::numLigne()const{
-    return d_numLigne;
-}
+int position::numColonne()const {return d_numColonne;}
 
-void position::changerPosition(int lig,int col){
+int position::numLigne()const {return d_numLigne;}
+
+void position::changerPosition(int col,int ligne){
 
     d_numColonne=col;
-    d_numLigne=lig;
+    d_numLigne=ligne;
 
 
 }
@@ -26,8 +22,8 @@ void position::sauverPosition(std::ostream&ost){
     ost<<"["<<d_numLigne<<","<<d_numColonne<<"]";
 }
 
-void position::afficherPosition(){
-    std::cout<<d_numLigne<<";"<<d_numColonne<<std::endl;
+void position::afficherPosition(std::ostream&ost){
+    ost<<d_numLigne<<";"<<d_numColonne<<std::endl;
 }
 void position::LireDepuis(std::istream&ist){
 char ac;
@@ -43,6 +39,8 @@ std::ostream& operator<<(std::ostream&ost, position&p){
 p.sauverPosition(ost);
 return ost;
 }
+
+
 
 
 

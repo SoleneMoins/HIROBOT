@@ -13,6 +13,4 @@ int main(int argc, char *argv[])
     mainwindow f(t);
     f.show();
     app.exec();
-
-
 }
