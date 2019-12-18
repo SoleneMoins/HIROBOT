@@ -173,26 +173,23 @@ void mainwindow::vueCreer(terrain&t){
 void mainwindow::OnDifficile(){
 
     d_t.changerTailleGrille(8,8);
-    d_t.changerNb(10,3,3);
+    d_t.changerNb();
     d_t.InitialisationGrille(10,3,3);
-    d_t.afficheGrille(); //Test : affichage console
     vueCreer(d_t);
 
 }
 
 void mainwindow::OnNormal(){
     d_t.changerTailleGrille(5,5);
-    d_t.changerNb(2,2,2);
+    d_t.changerNb();
     d_t.InitialisationGrille(2,2,2);
-    d_t.afficheGrille(); //Test : affichage console
     vueCreer(d_t);
 }
 
 void mainwindow::OnFacile(){
     d_t.changerTailleGrille(5,5);
-    d_t.changerNb(1,1,1);
+    d_t.changerNb();
     d_t.InitialisationGrille(1,1,1);
-    d_t.afficheGrille(); //Test affichage console
     vueCreer(d_t);
 }
 
@@ -200,7 +197,6 @@ void mainwindow::OnPerso(){
 
     d_p->exec();
     d_t = d_p->terr();
-    d_t.afficheGrille(); //Test affichage console
     vueCreer(d_t);
 
 
@@ -211,64 +207,41 @@ void mainwindow::OnHaut(){
 
     if(d_t.positionJoueur()->numLigne()!=0){
 
-            d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne(),d_t.positionJoueur()->numLigne()-1});
-
-            d_t.afficheGrille(); //Test affichage console
-            d_t.affichePositionJoueur(); //Test : affichage console
-            vueCreer(d_t);
-            if(d_t.JoueurAPerdu()){
-                perdu();
-            }
+            d_t.Joueur().deplacerElementHaut();
+            deplacement();
         }
-
 }
 
 void mainwindow::OnBas(){
 
-  if(d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
+    if(d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
 
-         d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne(),d_t.positionJoueur()->numLigne()+1});
-         d_t.afficheGrille(); //Test affichage console
-         d_t.affichePositionJoueur(); //Test : affichage console
-         vueCreer(d_t);
-         if(d_t.JoueurAPerdu()){
-             perdu();
-         }
+       d_t.Joueur().deplacerElementBas();
+       deplacement();
 
-       }
+     }
 
 }
 
 void mainwindow::OnDroite(){
 
-if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1){
+    if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1){
 
-            d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne()+1,d_t.positionJoueur()->numLigne()});
-            d_t.afficheGrille(); //Test affichage console
-            d_t.affichePositionJoueur(); //Test : affichage console
-            vueCreer(d_t);
-            if(d_t.JoueurAPerdu()){
-                perdu();
-            }
-       }
+         d_t.Joueur().deplacerElementDroite();
+         deplacement();
+    }
 
 
 }
 
 void mainwindow::OnGauche(){
 
- if(d_t.positionJoueur()->numColonne()!=0){
+    if(d_t.positionJoueur()->numColonne()!=0){
 
-           d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne()-1,d_t.positionJoueur()->numLigne()});
-           d_t.afficheGrille(); //Test affichage console
-           d_t.affichePositionJoueur(); //Test : affichage console
-           vueCreer(d_t);
-           if(d_t.JoueurAPerdu()){
-               perdu();
-           }
+         d_t.Joueur().deplacerElementGauche();
+         deplacement();
 
-       }
-
+     }
 
 }
 
@@ -276,72 +249,68 @@ void mainwindow::OnHG(){
 
     if(d_t.positionJoueur()->numColonne()!=0 && d_t.positionJoueur()->numLigne()!=0){
 
-             d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne()-1,d_t.positionJoueur()->numLigne()-1});
-             d_t.afficheGrille(); //Test affichage console
-             d_t.affichePositionJoueur(); //Test : affichage console
-
-             vueCreer(d_t);
-             if(d_t.JoueurAPerdu()){
-                 perdu();
-             }
-       }
+           d_t.Joueur().deplacerElementGauche();
+           d_t.Joueur().deplacerElementHaut();
+           deplacement();
+     }
 
 
 }
 
 void mainwindow::OnHD(){
 
-if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1 && d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
+    if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1 && d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
 
-            d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne()+1,d_t.positionJoueur()->numLigne()-1});
-            d_t.afficheGrille(); //Test affichage console
-            d_t.affichePositionJoueur(); //Test : affichage console
+         d_t.Joueur().deplacerElementDroite();
+         d_t.Joueur().deplacerElementHaut();
+         deplacement();
 
-            vueCreer(d_t);
-            if(d_t.JoueurAPerdu()){
-                perdu();
-            }
-       }
+    }
 
 }
 
 void mainwindow::OnBG(){
 
-     if(d_t.positionJoueur()->numColonne()!=0 && d_t.positionJoueur()->numLigne()!=0){
-            d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne()-1,d_t.positionJoueur()->numLigne()+1});
-            d_t.afficheGrille(); //Test affichage console
-            d_t.affichePositionJoueur(); //Test : affichage console
-            vueCreer(d_t);
-            if(d_t.JoueurAPerdu()){
-               perdu();
-            }
-       }
+    if(d_t.positionJoueur()->numColonne()!=0 && d_t.positionJoueur()->numLigne()!=0){
+
+         d_t.Joueur().deplacerElementGauche();
+         d_t.Joueur().deplacerElementBas();
+         deplacement();
+    }
  }
 
 void mainwindow::OnBD(){
 
-       if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1 && d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
+    if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1 && d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
 
-           d_t.changerPosJoueur(new position{d_t.positionJoueur()->numColonne()+1,d_t.positionJoueur()->numLigne()+1});
-           d_t.afficheGrille(); //Test affichage console
-           d_t.affichePositionJoueur(); //Test : affichage console
+        d_t.Joueur().deplacerElementDroite();
+        d_t.Joueur().deplacerElementBas();
+        deplacement();
 
-           vueCreer(d_t);
-           if(d_t.JoueurAPerdu()){
-               perdu();
-           }
+    }
+}
 
-       }
+void mainwindow::deplacement(){
+
+
+    d_t.deplacementRobot();
+    d_t.Joueur().augmenterDureeVie();
+    vueCreer(d_t);
+    if(d_t.JoueurAPerdu()){
+        perdu();
+    }
+
 
 }
 
 void mainwindow::perdu(){
 
-    QMessageBox perdu;
-    perdu.setText("Vous avez perdu");
-    perdu.exec();
-    terrain t;
-    vueCreer(t);
+    d_t.Joueur().calculScore();
+       QMessageBox perdu;
+       perdu.setText("Vous avez perdu.\n Votre score est de : "+QString::number(d_t.Joueur().score()));
+       perdu.exec();
+       terrain t;
+       vueCreer(t);
 
 }
 

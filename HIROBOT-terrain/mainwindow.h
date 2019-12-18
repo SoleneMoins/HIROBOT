@@ -27,6 +27,7 @@ private:
     grille*d_grille;
     personnaliserTerrain*d_p;
     void vueCreer(terrain&t);
+    void deplacement();
 
 
 private slots :

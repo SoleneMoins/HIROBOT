@@ -3,7 +3,8 @@
 
 robot::robot():element{nullptr}
 {}
-robot::robot(position*p):element{p};
+robot::robot(position*p):element{p}
+{}
 
 robot::~robot(){}
 
