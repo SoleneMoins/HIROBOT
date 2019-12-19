@@ -1,5 +1,5 @@
 #include "robot1g.h"
-
+#include  <cmath>
 robot1G::robot1G():robot{nullptr}
 {}
 
@@ -12,66 +12,38 @@ int robot1G::type()const{
 
 void robot1G::deplacerRobot(const joueur&j){
 
-
-    if(positionElement()->numLigne()!=j.positionElement()->numLigne() && positionElement()->numColonne()!=j.positionElement()->numColonne() ){
-
-            if(positionElement()->numLigne()<j.positionElement()->numLigne() && positionElement()->numColonne()<j.positionElement()->numColonne()){
-
-                if(j.positionElement()->numLigne()-positionElement()->numLigne()<j.positionElement()->numColonne()-positionElement()->numColonne()){
-                    deplacerElementBas();
-                }else{
-                    deplacerElementDroite();
-                }
-            }
-
-            if(positionElement()->numLigne()<j.positionElement()->numLigne() && positionElement()->numColonne()>j.positionElement()->numColonne()){
-
-                if(j.positionElement()->numLigne()-positionElement()->numLigne()<positionElement()->numColonne()-j.positionElement()->numColonne()){
-                    deplacerElementBas();
-                }else{
-                    deplacerElementGauche();
-                }
-            }
-
-            if(positionElement()->numLigne()>j.positionElement()->numLigne() && positionElement()->numColonne()>j.positionElement()->numColonne()){
-
-                if(positionElement()->numLigne()-j.positionElement()->numLigne()<positionElement()->numColonne()-j.positionElement()->numColonne()){
+    int distanceColonne,distanceLigne,distanceAbsolueColonne,distanceAbsolueLigne;
+    distanceColonne = positionElement()->numColonne()-j.positionElement()->numColonne();
+    distanceLigne = positionElement()->numLigne()-j.positionElement()->numLigne();
+    distanceAbsolueColonne = fabs(positionElement()->numColonne()-j.positionElement()->numColonne());
+    distanceAbsolueLigne = fabs(positionElement()->numLigne()-j.positionElement()->numLigne());
+    if (distanceAbsolueColonne>distanceLigne)
+        {
+            if (distanceLigne>0)
+                {
                     deplacerElementHaut();
-                }else{
-                    deplacerElementGauche();
+
                 }
-            }
+            else
+            {
 
-            if(positionElement()->numLigne()>j.positionElement()->numLigne() && positionElement()->numColonne()<j.positionElement()->numColonne()){
-
-                if(positionElement()->numLigne()-j.positionElement()->numLigne()<j.positionElement()->numColonne()-positionElement()->numColonne()){
-                    deplacerElementHaut();
-                }else{
-                    deplacerElementDroite();
-                }
-            }
-    }else{
-
-            if(positionElement()->numLigne()>j.positionElement()->numLigne()){
-                deplacerElementHaut();
-            }
-
-            if(positionElement()->numLigne()<j.positionElement()->numLigne()){
                 deplacerElementBas();
             }
+        }
+    else
+    {
+            if (distanceColonne>0)
+                {
 
-            if(positionElement()->numColonne()<j.positionElement()->numColonne()){
-                deplacerElementDroite();
+                    deplacerElementGauche();
+                }
+            else
+            {
+
+                   deplacerElementDroite();
             }
-
-            if(positionElement()->numColonne()>j.positionElement()->numColonne()){
-                deplacerElementGauche();
-            }
-
-
     }
 
-
-
 }
+
 
