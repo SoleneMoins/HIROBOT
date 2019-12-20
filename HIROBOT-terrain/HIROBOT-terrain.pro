@@ -35,7 +35,9 @@ SOURCES += \
     terrain.cpp \
     joueur.cpp \
     grille.cpp \
-    personnaliserterrain.cpp
+    personnaliserterrain.cpp \
+    robot1g.cpp \
+    robot2g.cpp
 
 HEADERS += \
     debris.h \
@@ -47,7 +49,9 @@ HEADERS += \
     terrain.h \
     joueur.h \
     grille.h \
-    personnaliserterrain.h
+    personnaliserterrain.h \
+    robot1g.h \
+    robot2g.h
 
 FORMS += \
         mainwindow.ui

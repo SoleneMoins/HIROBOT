@@ -1,9 +1,7 @@
 #include"debris.h"
 
-debris::debris(const position&p):d_positionDebris{p} {}
-int debris::d_niveauDanger=1;
+debris::debris():element{nullptr}
+{}
 
-position debris::positionDebris()const
-{
-    return d_positionDebris;
-}
+debris::debris(position*p):element{p}
+{}
