@@ -11,7 +11,7 @@ int joueur::score()const{
 
 }
 void joueur::sauverJoueur(std::ostream &ost) const{
-    ost<<"("<<d_nom<<","<<positionElement()<<","<<d_score<<","<<d_dureeVie<<")";
+    ost<<"("<<d_nom<<","<<*positionElement()<<","<<d_score<<","<<d_dureeVie<<")";
 }
 void joueur::LireDepuis(std::istream&ist){
     char c;
