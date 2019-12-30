@@ -173,7 +173,6 @@ void mainwindow::vueCreer(terrain&t){
 void mainwindow::OnDifficile(){
 
     d_t.changerTailleGrille(8,8);
-    d_t.changerNb();
     d_t.InitialisationGrille(10,3,3);
     vueCreer(d_t);
 
@@ -181,14 +180,12 @@ void mainwindow::OnDifficile(){
 
 void mainwindow::OnNormal(){
     d_t.changerTailleGrille(5,5);
-    d_t.changerNb();
     d_t.InitialisationGrille(2,2,2);
     vueCreer(d_t);
 }
 
 void mainwindow::OnFacile(){
     d_t.changerTailleGrille(5,5);
-    d_t.changerNb();
     d_t.InitialisationGrille(1,1,1);
     vueCreer(d_t);
 }

@@ -1,5 +1,6 @@
 #include "terrain.h"
 
+
 terrain::terrain():d_joueur{},d_nbligne{0},d_nbcolonne{0}
 {}
 
@@ -9,7 +10,6 @@ terrain::terrain(int nbdebris,int nbrobotfirstG, int nbrobotsecondG, int nbligne
     if(terrainOk()){
 
          InitialisationGrille(nbdebris,nbrobotfirstG,nbrobotsecondG);
-         sauverTerrain("/Users/Neron/Desktop/premiereSauvegarde.txt");
 
     }
 }
@@ -17,7 +17,16 @@ terrain::terrain(int nbdebris,int nbrobotfirstG, int nbrobotsecondG, int nbligne
 void terrain::sauverTerrain(const std::string&nomFichier){
 
    std::ofstream f (nomFichier, std::ofstream::out);
-    f << d_joueur << "," << d_debris.size() << "," << nbRobot1G() << "," << nbRobot2G() << "," << d_nbligne << "," << d_nbcolonne;
+    f << d_joueur << ","<< d_debris.size() << ","<< nbRobot1G() << ","<< nbRobot2G() << "," << d_nbligne << "," << d_nbcolonne;
+
+    for(auto r:d_robot){
+        f<<r;
+    }
+
+    for(auto d:d_debris){
+        f<<d;
+    }
+
     f.close();
 
 
@@ -66,15 +75,12 @@ joueur terrain::Joueur(){
 
 void terrain::lireTerrain(const std::string&nomFichier)
 {
-    std::ifstream f(nomFichier);
+        std::ifstream f(nomFichier);
         char c;
         int nb_debris;
         int nb1G;
         int nb2G;
-       // f >> d_joueur >> c >> nb_debris >> c >> nb1G >> c >> nb2G >> c >> d_nbligne >> c >> d_nbcolonne;
-
-        changerTailleGrille(d_nbligne,d_nbcolonne);
-        changerNb();
+        f >> d_joueur >> c >> nb_debris >> c >> nb1G >> c >> nb2G >> c >> d_nbligne >> c >> d_nbcolonne;
         InitialisationGrille(nb_debris,nb1G,nb2G);
 }
 
@@ -109,19 +115,36 @@ void terrain::deplacementRobot(){
 
 }
 
+void terrain::supprimerValeurTableauRobot(std::vector <robot*>r,int i){
+
+    for(int g=i;g<static_cast<int>(r.size()-1);++g){
+         std::swap(r[static_cast<unsigned>(g)],r[static_cast<unsigned>(g+1)]);
+    }
+     r.pop_back();
+}
+
+
+void terrain::suppValeurTab(std::vector<int>&V,int i){
+
+    for(int j = 0;j<V.size();j++){
+        if(V[j]==i){
+            for(int d=j;d<V.size()-1;d++){
+                std::swap(V[d],V[d+1]);
+            }
+            V.pop_back();
+        }
+    }
+}
+
 
 //Problème avec une valeur à 0 quand il la génère en premier, à corriger
 void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
 
-
-    std::vector<int> V(9);
+    changerNb();
+    std::vector<int> V(14);
     V = { 0,0,0,0,0,0,1,0,2,0,3,0,4,0 };
 
-    int compteurJoueur = 0;
-    int compteurRobot1G = 0;
-    int compteurRobot2G = 0;
-    int compteurDebris = 0;
-    int compteurZero = 0;
+    int compteurJoueur = 0, compteurRobot1G = 0, compteurRobot2G = 0, compteurDebris = 0, compteurZero = 0;
 
     srand(time(NULL));
 
@@ -152,95 +175,42 @@ void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
                 int v = 10;
                 while(v>0){
 
-                    for(int g=0;g<static_cast<int>(V.size());++g){
-
-                        if(V[static_cast<unsigned>(g)]==0){
-                            for(int r=g;r<static_cast<int>(V.size());++r){
-
-                                     V[static_cast<unsigned>(r)]=V[static_cast<unsigned>(r+1)];
-
-                            }
-                        }
-                    }
-
-                    V.resize(V.size()-1);
-                    --v;
-                }
-
-
-                 compteurZero = ((d_nbligne*d_nbcolonne)-(nbdebris+nbRobot1G+nbRobot2G+1))+1;
+                   suppValeurTab(V,0);
+                   --v;
+                 }
+                 compteurZero += 1;
             }
 
 
             if(compteurRobot1G==nbRobot1G){
 
-                for(int g=0;g<static_cast<int>(V.size());++g){
-
-                    if(V[static_cast<unsigned>(g)]==2){
-                        for(int r=g;r<static_cast<int>(V.size());++r){
-                            V[static_cast<unsigned>(r)]=V[static_cast<unsigned>(r+1)];
-
-                        }
-                    }
-                }
-
-                 V.resize(V.size()-1);
+                 suppValeurTab(V,2);
                  compteurRobot1G = nbRobot1G+1;
             }
             if(compteurRobot2G==nbRobot2G){
 
-                for(int g=0;g<static_cast<int>(V.size());++g){
-
-                    if(V[static_cast<unsigned>(g)]==3){
-                        for(int r=g;r<static_cast<int>(V.size());++r){
-                            V[static_cast<unsigned>(r)]=V[static_cast<unsigned>(r+1)];
-
-                        }
-                    }
-                }
-
-                 V.resize(V.size()-1);
-                 compteurRobot2G = nbRobot2G+1;
-
+                 suppValeurTab(V,3);
+                 compteurRobot2G += 1;
 
             }
+
             if(compteurDebris==nbdebris){
 
-                for(int g=0;g<static_cast<int>(V.size());++g){
-
-                    if(V[static_cast<unsigned>(g)]==4){
-                        for(int r=g;r<static_cast<int>(V.size());++r){
-                            V[static_cast<unsigned>(r)]=V[static_cast<unsigned>(r+1)];
-
-                        }
-                    }
-                }
-
-                 V.resize(V.size()-1);
-                 compteurDebris = nbdebris+1;
-
+                 suppValeurTab(V,4);
+                 compteurDebris += nbdebris+1;
             }
 
             if(compteurJoueur==1){
 
-                for(int g=0;g<static_cast<int>(V.size());++g){
-
-                    if(V[static_cast<unsigned>(g)]==1){
-                        for(int r=g;r<static_cast<int>(V.size());++r){
-                            V[static_cast<unsigned>(r)]=V[static_cast<unsigned>(r+1)];
-
-                        }
-                    }
-                }
-
-
-                 V.resize(V.size()-1);
-                 compteurJoueur = 2;
+                 suppValeurTab(V,1);
+                 compteurJoueur += 2;
 
             }
 
         }
     }
+
+    sauverTerrain(":/sauvegarde/Sauvegarde/sauv.txt");
 
 
 }
@@ -295,9 +265,9 @@ void terrain::collisionRobotEtDebris(){
             if(d_robot[static_cast<unsigned>(i)]->positionElement()->numLigne()==d_debris[static_cast<unsigned>(j)]->positionElement()->numLigne() && d_robot[static_cast<unsigned>(i)]->positionElement()->numColonne()==d_debris[static_cast<unsigned>(j)]->positionElement()->numColonne()){
                 std::cout<<"robot detruit"<<std::endl; //Test
 
-               // supprimerValeurTableau(d_robot,i);
+               // supprimerValeurTableauRobot(d_robot,i);
 
-                for(int g=i;g<static_cast<int>(d_robot.size()-1);++g){
+               for(int g=i;g<static_cast<int>(d_robot.size()-1);++g){
                     d_robot[static_cast<unsigned>(g)]=d_robot[static_cast<unsigned>(g+1)];
                 }
                 d_robot.pop_back();
@@ -339,19 +309,14 @@ void terrain::collisionRobotEtRobot(){
 
 }
 
-void terrain::supprimerValeurTableau(std::vector <robot*>r,int i){
-    for(int g=i;g<static_cast<int>(r.size()-1);++g){
-         r[static_cast<unsigned>(g)]=r[static_cast<unsigned>(g+1)];
-    }
-     r.pop_back();
-}
+
 
 
 //Fonction test
 
 void terrain::affichePositionJoueur(){
 
-    std::cout<<d_joueur.positionElement()->numLigne()<<";"<<d_joueur.positionElement()->numColonne()<<std::endl;
+    std::cout<<d_joueur<<std::endl;
 
 }
 
