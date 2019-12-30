@@ -12,7 +12,12 @@ public:
     void deplacerElementDroite();
     void deplacerElementBas();
     void deplacerElementHaut();
-
+    void deplacerElementHautGauche();
+    void deplacerElementHautDroite();
+    void deplacerElementBasGauche();
+    void deplacerElementBasDroite();
+    bool peutSeDeplacer(int nbLignes, int nbColonnes, int typeDeplacement);
+    bool collision(element elem);
 private:
     position* d_pos;
 
