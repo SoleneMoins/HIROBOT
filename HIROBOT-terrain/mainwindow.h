@@ -21,6 +21,7 @@ class mainwindow : public QMainWindow
 public:
     mainwindow(terrain&t);
     void perdu();
+    void gagne();
 private:
     terrain d_t;
     QMainWindow*d_win;
