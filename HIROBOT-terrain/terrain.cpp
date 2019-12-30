@@ -222,14 +222,14 @@ void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
 bool terrain::JoueurAPerdu(){
 
     for(auto r1:d_robot){
-                if(r1->positionElement()->numLigne()==d_joueur.positionElement()->numLigne()&&r1->positionElement()->numColonne()==d_joueur.positionElement()->numColonne()){
+                if(r1->collision(d_joueur)){
                     return true;
                 }
             }
 
 
         for(auto d:d_debris){
-            if(d->positionElement()->numLigne()==d_joueur.positionElement()->numLigne()&&d->positionElement()->numColonne()==d_joueur.positionElement()->numColonne()){
+            if(d->collision(d_joueur)){
                 return true;
             }
         }
@@ -262,12 +262,14 @@ void terrain::collisionRobotEtDebris(){
 
     for(int i=0;i<static_cast<int>(d_robot.size());++i){
         for(int j=0;j<static_cast<int>(d_debris.size());++j){
-            if(d_robot[static_cast<unsigned>(i)]->positionElement()->numLigne()==d_debris[static_cast<unsigned>(j)]->positionElement()->numLigne() && d_robot[static_cast<unsigned>(i)]->positionElement()->numColonne()==d_debris[static_cast<unsigned>(j)]->positionElement()->numColonne()){
+            if(d_robot[static_cast<unsigned>(i)]->collision(*d_debris[static_cast<unsigned>(j)])){
+
                 std::cout<<"robot detruit"<<std::endl; //Test
 
                // supprimerValeurTableauRobot(d_robot,i);
 
-               for(int g=i;g<static_cast<int>(d_robot.size()-1);++g){
+
+              for(int g=i;g<static_cast<int>(d_robot.size()-1);++g){
                     d_robot[static_cast<unsigned>(g)]=d_robot[static_cast<unsigned>(g+1)];
                 }
                 d_robot.pop_back();
@@ -283,7 +285,7 @@ void terrain::collisionRobotEtRobot(){
 
     for(int i=0;i<static_cast<int>(d_robot.size());++i){
         for(int j=i+1;j<static_cast<int>(d_robot.size());++j){
-            if(d_robot[static_cast<unsigned>(i)]->positionElement()->numLigne()==d_robot[static_cast<unsigned>(j)]->positionElement()->numLigne() && d_robot[static_cast<unsigned>(i)]->positionElement()->numColonne()==d_robot[static_cast<unsigned>(j)]->positionElement()->numColonne()){
+            if(d_robot[static_cast<unsigned>(i)]->collision(*d_robot[static_cast<unsigned>(j)])){
 
                 std::cout<<"collision 2 robots"<<std::endl; //Test
                 position*p=d_robot[static_cast<unsigned>(i)]->positionElement();
