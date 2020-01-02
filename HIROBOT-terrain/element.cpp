@@ -3,6 +3,7 @@
 element::element(position*p):d_pos{p}
 {}
 
+element::~element(){delete d_pos;}
 
 position* element::positionElement() const{
     return d_pos;
