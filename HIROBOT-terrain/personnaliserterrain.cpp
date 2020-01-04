@@ -82,7 +82,7 @@ void personnaliserTerrain::onValider(){
     int nbrobot2G = tr2.toInt();
 
 
-    if(nbligne*nbcolonne>nbdebris+nbrobot1G+nbrobot2G+1 && nbdebris!=0 && nbrobot1G!=0 && nbrobot2G!=0){
+    if(nbligne*nbcolonne>nbdebris+nbrobot1G+nbrobot2G+1 && nbdebris!=0 && nbrobot1G!=0 && nbrobot2G!=0 && nbligne<=10 && nbcolonne<=10){
 
           d_terr.changerTailleGrille(nbligne,nbcolonne);
           d_terr.InitialisationGrille(nbdebris,nbrobot1G,nbrobot2G);

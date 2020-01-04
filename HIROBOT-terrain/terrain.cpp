@@ -110,12 +110,10 @@ void terrain::deplacementRobot(){
         }
 
 
-
-    if(!JoueurAPerdu()){
          collisionRobotEtRobot();
          collisionRobotEtDebris();
 
-    }
+
 
 }
 
@@ -269,8 +267,10 @@ void terrain::collisionRobotEtDebris(){
         for(int j=0;j<static_cast<int>(d_debris.size());++j){
             if(d_robot[static_cast<unsigned>(i)]->collision(*d_debris[static_cast<unsigned>(j)])){
 
-                d_joueur.augmenterNbRobotsDetruits();
-                std::cout<<"Collision Debris "<<d_joueur.nbRobotsDetruits()<<std::endl; //Test
+                if(!JoueurAPerdu()){
+                    d_joueur.augmenterNbRobotsDetruits();
+                }
+                    std::cout<<"Collision Debris "<<d_joueur.nbRobotsDetruits()<<std::endl; //Test
 
 
                // supprimerValeurTableauRobot(d_robot,i);
@@ -294,27 +294,30 @@ void terrain::collisionRobotEtRobot(){
         for(int j=i+1;j<static_cast<int>(d_robot.size());++j){
             if(d_robot[static_cast<unsigned>(i)]->collision(*d_robot[static_cast<unsigned>(j)])){
 
-                d_joueur.augmenterNbRobotsDetruits();
-                d_joueur.augmenterNbRobotsDetruits();
+                if(!JoueurAPerdu()){
+                     d_joueur.augmenterNbRobotsDetruits();
+                     d_joueur.augmenterNbRobotsDetruits();
 
-                std::cout<<"Collision Robot "<<d_joueur.nbRobotsDetruits()<<std::endl; //Test
+                    std::cout<<"Collision Robot "<<d_joueur.nbRobotsDetruits()<<std::endl; //Test
 
-                position*p=d_robot[static_cast<unsigned>(i)]->positionElement();
+                    position*p=d_robot[static_cast<unsigned>(i)]->positionElement();
 
-               // supprimerValeurTableau(d_robot,i);
-               // supprimerValeurTableau(d_robot,j);
+                   // supprimerValeurTableau(d_robot,i);
+                   // supprimerValeurTableau(d_robot,j);
 
-                for(int g=i;g<static_cast<int>(d_robot.size()-1);++g){
-                    d_robot[static_cast<unsigned>(g)]=d_robot[static_cast<unsigned>(g+1)];
+                    for(int g=i;g<static_cast<int>(d_robot.size()-1);++g){
+                        d_robot[static_cast<unsigned>(g)]=d_robot[static_cast<unsigned>(g+1)];
+                    }
+                    d_robot.pop_back();
+
+                    for(int g=j;g<static_cast<int>(d_robot.size()-1);++g){
+                        d_robot[static_cast<unsigned>(g)]=d_robot[static_cast<unsigned>(g+1)];
+                    }
+                    d_robot.pop_back();
+
+                    d_debris.push_back(new debris(p));
+
                 }
-                d_robot.pop_back();
-
-                for(int g=j;g<static_cast<int>(d_robot.size()-1);++g){
-                    d_robot[static_cast<unsigned>(g)]=d_robot[static_cast<unsigned>(g+1)];
-                }
-                d_robot.pop_back();
-
-                d_debris.push_back(new debris(p));
 
             }
         }
