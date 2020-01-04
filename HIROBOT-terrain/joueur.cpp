@@ -1,9 +1,9 @@
 #include"joueur.h"
 
-joueur::joueur():element{nullptr},d_nom{""},d_score{0},d_dureeVie{0}
+joueur::joueur():element{nullptr},d_nom{""},d_score{0},d_dureeVie{0},d_robotDetruit{0}
 {}
 
-joueur::joueur(position*p,const std::string&nom, int score):element{p},d_nom{nom},d_score{score},d_dureeVie{0}
+joueur::joueur(position*p,const std::string&nom, int score):element{p},d_nom{nom},d_score{score},d_dureeVie{0}, d_robotDetruit{0}
 {}
 
 int joueur::score()const{
@@ -15,6 +15,19 @@ int joueur::dureeVie()const
 {
     return d_dureeVie;
 }
+
+int joueur::nbRobotsDetruits()const{
+
+    return d_robotDetruit;
+
+}
+
+void joueur::Reinitialiser(){
+    d_score = 0;
+    d_robotDetruit = 0;
+    d_dureeVie = 0;
+}
+
 std::string joueur:: nomJoueur()const{return d_nom;}
 
 void joueur::sauverJoueur(std::ostream &ost) const{
@@ -28,11 +41,15 @@ void joueur::LireDepuis(std::istream&ist){
 
 }
 void joueur::calculScore(){
-    d_score = d_dureeVie;
+    d_score = d_dureeVie + d_robotDetruit;
 }
 
 void joueur::augmenterDureeVie(){
-    d_dureeVie++;
+    d_dureeVie+=1;
+}
+
+void joueur::augmenterNbRobotsDetruits(){
+    d_robotDetruit+=1;
 }
 
 

@@ -3,6 +3,7 @@
 
 
 #include "joueur.h"
+#include "joueurExpert.h"
 #include "robot1g.h"
 #include "robot2g.h"
 #include "debris.h"
@@ -32,7 +33,7 @@ class terrain
          @param j le joueur du terrain
 
      */
-     terrain(int nbdebris, int nbrobotfirstG, int nbrobotsecondG, int nbligne, int nbcolonne, joueur j);
+     terrain(int nbdebris, int nbrobotfirstG, int nbrobotsecondG, int nbligne, int nbcolonne, joueur& j);
 
      ///@return le nombre de colonne du terrain
      int nbColonne()const;
@@ -121,7 +122,15 @@ class terrain
      */
      bool terrainOk();
 
+     /**
+       Renvoie le score du joueur
+     */
+     int scoreJoueur();
 
+     /**
+       Augmente durée vie joueur
+     */
+     void dureeVie();
 
      /**
        Test si il y a collision entre un robot et un débris

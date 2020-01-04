@@ -4,7 +4,7 @@
 terrain::terrain():d_joueur{},d_nbligne{0},d_nbcolonne{0}
 {}
 
-terrain::terrain(int nbdebris,int nbrobotfirstG, int nbrobotsecondG, int nbligne, int nbcolonne, joueur j):d_joueur{j},d_nbligne{nbligne},d_nbcolonne{nbcolonne}
+terrain::terrain(int nbdebris,int nbrobotfirstG, int nbrobotsecondG, int nbligne, int nbcolonne, joueur& j):d_joueur{j},d_nbligne{nbligne},d_nbcolonne{nbcolonne}
 {
 
     if(terrainOk()){
@@ -109,9 +109,13 @@ void terrain::deplacementRobot(){
 
         }
 
-    collisionRobotEtRobot();
-    collisionRobotEtDebris();
 
+
+    if(!JoueurAPerdu()){
+         collisionRobotEtRobot();
+         collisionRobotEtDebris();
+
+    }
 
 }
 
@@ -126,9 +130,9 @@ void terrain::supprimerValeurTableauRobot(std::vector <robot*>r,int i){
 
 void terrain::suppValeurTab(std::vector<int>&V,int i){
 
-    for(int j = 0;j<V.size();j++){
+    for(int j = 0;j<static_cast<int>(V.size());j++){
         if(V[j]==i){
-            for(int d=j;d<V.size()-1;d++){
+            for(int d=j;d<static_cast<int>(V.size()-1);d++){
                 std::swap(V[d],V[d+1]);
             }
             V.pop_back();
@@ -141,6 +145,7 @@ void terrain::suppValeurTab(std::vector<int>&V,int i){
 void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
 
     changerNb();
+    d_joueur.Reinitialiser();
     std::vector<int> V(14);
     V = { 0,0,0,0,0,0,1,0,2,0,3,0,4,0 };
 
@@ -264,7 +269,9 @@ void terrain::collisionRobotEtDebris(){
         for(int j=0;j<static_cast<int>(d_debris.size());++j){
             if(d_robot[static_cast<unsigned>(i)]->collision(*d_debris[static_cast<unsigned>(j)])){
 
-                std::cout<<"robot detruit"<<std::endl; //Test
+                d_joueur.augmenterNbRobotsDetruits();
+                std::cout<<"Collision Debris "<<d_joueur.nbRobotsDetruits()<<std::endl; //Test
+
 
                // supprimerValeurTableauRobot(d_robot,i);
 
@@ -287,7 +294,11 @@ void terrain::collisionRobotEtRobot(){
         for(int j=i+1;j<static_cast<int>(d_robot.size());++j){
             if(d_robot[static_cast<unsigned>(i)]->collision(*d_robot[static_cast<unsigned>(j)])){
 
-                std::cout<<"collision 2 robots"<<std::endl; //Test
+                d_joueur.augmenterNbRobotsDetruits();
+                d_joueur.augmenterNbRobotsDetruits();
+
+                std::cout<<"Collision Robot "<<d_joueur.nbRobotsDetruits()<<std::endl; //Test
+
                 position*p=d_robot[static_cast<unsigned>(i)]->positionElement();
 
                // supprimerValeurTableau(d_robot,i);
@@ -309,6 +320,16 @@ void terrain::collisionRobotEtRobot(){
         }
     }
 
+}
+
+int terrain::scoreJoueur(){
+
+    d_joueur.calculScore();
+    return d_joueur.score();
+}
+
+void terrain::dureeVie(){
+    d_joueur.augmenterDureeVie();
 }
 
 

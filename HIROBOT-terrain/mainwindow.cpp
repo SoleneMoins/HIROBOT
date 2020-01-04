@@ -290,7 +290,10 @@ void mainwindow::deplacement(){
     vueCreer(d_t);
     if(d_t.JoueurAPerdu()){
         perdu();
+    }else{
+        d_t.dureeVie();
     }
+
     if(d_t.JoueurAGagne()){
         gagne();
     }
@@ -300,9 +303,9 @@ void mainwindow::deplacement(){
 
 void mainwindow::perdu(){
 
-    d_t.Joueur().calculScore();
+
        QMessageBox perdu;
-       perdu.setText("Vous avez perdu.\n Votre score est de : "+QString::number(d_t.Joueur().score()));
+       perdu.setText("Vous avez perdu.\n Votre score est de : "+QString::number(d_t.scoreJoueur()));
        perdu.exec();
        terrain t;
        vueCreer(t);
@@ -311,10 +314,10 @@ void mainwindow::perdu(){
 
 void mainwindow::gagne(){
 
-       d_t.Joueur().calculScore();
-       QMessageBox perdu;
-       perdu.setText("Felicitation vous avez gagné.\n Votre score est de : "+QString::number(d_t.Joueur().score()));
-       perdu.exec();
+
+       QMessageBox gagne;
+       gagne.setText("Felicitation vous avez gagné.\n Votre score est de : "+QString::number(d_t.scoreJoueur()));
+       gagne.exec();
        terrain t;
        vueCreer(t);
 
