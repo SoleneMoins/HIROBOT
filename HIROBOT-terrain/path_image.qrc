@@ -6,5 +6,6 @@
         <file>Images/joueur.png</file>
         <file>Images/robot1G.png</file>
         <file>Images/robot2G.png</file>
+        <file>Images/legende.png</file>
     </qresource>
 </RCC>

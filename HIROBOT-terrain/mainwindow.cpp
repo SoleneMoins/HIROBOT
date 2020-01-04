@@ -59,6 +59,17 @@ void mainwindow::vueCreer(terrain&t){
      connect(normal,&QPushButton::clicked,this,&mainwindow::OnNormal);
      connect(facile,&QPushButton::clicked,this,&mainwindow::OnFacile);
 
+     //Légende
+
+     auto LabelLegende = new QLabel{this};
+     QPixmap *imageJoueur = new QPixmap (":/Images/Images/legende.png" );
+     LabelLegende->setPixmap(*imageJoueur);
+
+     LabelLegende->setFixedSize(maximumWidth(),100);
+     LabelLegende->setAlignment(Qt::AlignCenter);
+
+
+
      //Boutons deplacements
 
      auto layoutboutcote = new QHBoxLayout{};
@@ -146,7 +157,10 @@ void mainwindow::vueCreer(terrain&t){
 
     //Principale
     auto layout = new QVBoxLayout{};
+
     layout->addWidget(label,Qt::AlignCenter);
+    layout->addWidget(LabelLegende,Qt::AlignCenter);
+
     layout->addLayout(layoutbouton);
     layout->addWidget(d_grille,Qt::AlignCenter);
     layout->addLayout(layoutbouthaut,Qt::AlignCenter);
