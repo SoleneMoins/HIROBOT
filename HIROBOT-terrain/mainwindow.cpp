@@ -287,7 +287,6 @@ void mainwindow::deplacement(){
 
 
     d_t.deplacementRobot();
-    d_t.Joueur().changerDureeVie(d_t.Joueur().dureeVie()+1);
     vueCreer(d_t);
     if(d_t.JoueurAPerdu()){
         perdu();

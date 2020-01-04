@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/sauvegarde">
+        <file>Sauvegarde/sauv.txt</file>
+    </qresource>
+</RCC>

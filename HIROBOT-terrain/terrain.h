@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <QTextStream>
+#include <QFile>
 
 /**
   classe representant un terrain
@@ -79,7 +81,7 @@ class terrain
        Sauvegarder un terrain dans un fichier
        @param nomFichier nom du fichier
      */
-     void sauverTerrain(const std::string&nomFichier);
+     void sauverTerrain(const std::string& nomFichier);
 
      /**
        Change la taille du terrain
