@@ -59,6 +59,17 @@ void mainwindow::vueCreer(terrain&t){
      connect(normal,&QPushButton::clicked,this,&mainwindow::OnNormal);
      connect(facile,&QPushButton::clicked,this,&mainwindow::OnFacile);
 
+     //Légende
+
+     auto LabelLegende = new QLabel{this};
+     QPixmap *imageJoueur = new QPixmap (":/Images/Images/legende.png" );
+     LabelLegende->setPixmap(*imageJoueur);
+
+     LabelLegende->setFixedSize(maximumWidth(),100);
+     LabelLegende->setAlignment(Qt::AlignCenter);
+
+
+
      //Boutons deplacements
 
      auto layoutboutcote = new QHBoxLayout{};
@@ -146,7 +157,10 @@ void mainwindow::vueCreer(terrain&t){
 
     //Principale
     auto layout = new QVBoxLayout{};
+
     layout->addWidget(label,Qt::AlignCenter);
+    layout->addWidget(LabelLegende,Qt::AlignCenter);
+
     layout->addLayout(layoutbouton);
     layout->addWidget(d_grille,Qt::AlignCenter);
     layout->addLayout(layoutbouthaut,Qt::AlignCenter);
@@ -173,7 +187,6 @@ void mainwindow::vueCreer(terrain&t){
 void mainwindow::OnDifficile(){
 
     d_t.changerTailleGrille(8,8);
-    d_t.changerNb();
     d_t.InitialisationGrille(10,3,3);
     vueCreer(d_t);
 
@@ -181,14 +194,12 @@ void mainwindow::OnDifficile(){
 
 void mainwindow::OnNormal(){
     d_t.changerTailleGrille(5,5);
-    d_t.changerNb();
     d_t.InitialisationGrille(2,2,2);
     vueCreer(d_t);
 }
 
 void mainwindow::OnFacile(){
     d_t.changerTailleGrille(5,5);
-    d_t.changerNb();
     d_t.InitialisationGrille(1,1,1);
     vueCreer(d_t);
 }
@@ -205,7 +216,7 @@ void mainwindow::OnPerso(){
 
 void mainwindow::OnHaut(){
 
-    if(d_t.positionJoueur()->numLigne()!=0){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),0)){
 
             d_t.Joueur().deplacerElementHaut();
             deplacement();
@@ -214,7 +225,7 @@ void mainwindow::OnHaut(){
 
 void mainwindow::OnBas(){
 
-    if(d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),1)){
 
        d_t.Joueur().deplacerElementBas();
        deplacement();
@@ -225,7 +236,7 @@ void mainwindow::OnBas(){
 
 void mainwindow::OnDroite(){
 
-    if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),3)){
 
          d_t.Joueur().deplacerElementDroite();
          deplacement();
@@ -236,7 +247,7 @@ void mainwindow::OnDroite(){
 
 void mainwindow::OnGauche(){
 
-    if(d_t.positionJoueur()->numColonne()!=0){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),2)){
 
          d_t.Joueur().deplacerElementGauche();
          deplacement();
@@ -247,10 +258,9 @@ void mainwindow::OnGauche(){
 
 void mainwindow::OnHG(){
 
-    if(d_t.positionJoueur()->numColonne()!=0 && d_t.positionJoueur()->numLigne()!=0){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),0) && d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),2)){
 
-           d_t.Joueur().deplacerElementGauche();
-           d_t.Joueur().deplacerElementHaut();
+           d_t.Joueur().deplacerElementHautGauche();
            deplacement();
      }
 
@@ -259,10 +269,9 @@ void mainwindow::OnHG(){
 
 void mainwindow::OnHD(){
 
-    if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1 && d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),0) && d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),3)){
 
-         d_t.Joueur().deplacerElementDroite();
-         d_t.Joueur().deplacerElementHaut();
+         d_t.Joueur().deplacerElementHautDroite();
          deplacement();
 
     }
@@ -271,20 +280,18 @@ void mainwindow::OnHD(){
 
 void mainwindow::OnBG(){
 
-    if(d_t.positionJoueur()->numColonne()!=0 && d_t.positionJoueur()->numLigne()!=0){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),1) && d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),2)){
 
-         d_t.Joueur().deplacerElementGauche();
-         d_t.Joueur().deplacerElementBas();
+         d_t.Joueur().deplacerElementBasGauche();
          deplacement();
     }
  }
 
 void mainwindow::OnBD(){
 
-    if(d_t.positionJoueur()->numColonne()!=d_t.nbColonne()-1 && d_t.positionJoueur()->numLigne()!=d_t.nbLigne()-1){
+    if(d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),1) && d_t.Joueur().peutSeDeplacer(d_t.nbLigne(),d_t.nbColonne(),3)){
 
-        d_t.Joueur().deplacerElementDroite();
-        d_t.Joueur().deplacerElementBas();
+        d_t.Joueur().deplacerElementBasDroite();
         deplacement();
 
     }
@@ -294,10 +301,15 @@ void mainwindow::deplacement(){
 
 
     d_t.deplacementRobot();
-    d_t.Joueur().augmenterDureeVie();
     vueCreer(d_t);
     if(d_t.JoueurAPerdu()){
         perdu();
+    }else{
+        d_t.dureeVie();
+    }
+
+    if(d_t.JoueurAGagne()){
+        gagne();
     }
 
 
@@ -305,10 +317,21 @@ void mainwindow::deplacement(){
 
 void mainwindow::perdu(){
 
-    d_t.Joueur().calculScore();
+
        QMessageBox perdu;
-       perdu.setText("Vous avez perdu.\n Votre score est de : "+QString::number(d_t.Joueur().score()));
+       perdu.setText("Vous avez perdu.\n Votre score est de : "+QString::number(d_t.scoreJoueur()));
        perdu.exec();
+       terrain t;
+       vueCreer(t);
+
+}
+
+void mainwindow::gagne(){
+
+
+       QMessageBox gagne;
+       gagne.setText("Felicitation vous avez gagné.\n Votre score est de : "+QString::number(d_t.scoreJoueur()));
+       gagne.exec();
        terrain t;
        vueCreer(t);
 

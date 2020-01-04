@@ -10,7 +10,9 @@ public :
     virtual void deplacerRobot(const joueur&j) = 0;
     virtual int type()const=0;
     void affichePosition()const;
+    void sauverPosition(std::ostream&ost);
 
 
 };
+std::ostream& operator<<(std::ostream&ost, robot&r);
 #endif // ROBOT_H

@@ -6,11 +6,12 @@ class position;
 
 class joueurExpert:public joueur{
 public:
+    joueurExpert();
     joueurExpert(position*p,const std::string&nom, int score);
-    void deplaceHautDroite()=delete;
-    void deplaceHautGauche()=delete;
-    void deplaceBasDroit()=delete;
-    void deplaceBasGauche()=delete;
+    void deplaceElementHautDroite()=delete;
+    void deplaceElementHautGauche()=delete;
+    void deplaceElementBasDroit()=delete;
+    void deplaceElementBasGauche()=delete;
 
 
 
