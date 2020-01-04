@@ -1,5 +1,7 @@
 #include "terrain.h"
-
+#include <QString>
+#include <QFile>
+#include <QDebug>
 
 terrain::terrain():d_joueur{},d_nbligne{0},d_nbcolonne{0}
 {}
@@ -28,6 +30,23 @@ void terrain::sauverTerrain(const std::string&nomFichier){
     }
 
     f.close();
+    /*
+    QString data;
+    QString fileName(":/sauvegarde/Sauvegarde/save.txt");
+
+    QFile file(fileName);
+    if(!file.open(QIODevice::ReadOnly)) {
+        qDebug()<<"filenot opened"<<endl;
+    }
+    else
+    {
+        qDebug()<<"file opened"<<endl;
+        data = file.readAll();
+    }
+
+    file.close();
+
+    qDebug()<<data<<endl;*/
 
 
 }
