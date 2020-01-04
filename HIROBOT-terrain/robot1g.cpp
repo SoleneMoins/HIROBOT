@@ -22,12 +22,15 @@ int robot1G::type()const{
 void robot1G::deplacerRobot(const joueur&j){
 
     int distanceColonne,distanceLigne,distanceAbsolueColonne,distanceAbsolueLigne;
+
     distanceColonne = positionElement()->numColonne()-j.positionElement()->numColonne();
     distanceLigne = positionElement()->numLigne()-j.positionElement()->numLigne();
+
     distanceAbsolueColonne = fabs(positionElement()->numColonne()-j.positionElement()->numColonne());
     distanceAbsolueLigne = fabs(positionElement()->numLigne()-j.positionElement()->numLigne());
-    if (distanceAbsolueColonne>distanceLigne)
-        {
+
+    if (distanceAbsolueColonne == 0 || distanceAbsolueLigne >= distanceAbsolueColonne){
+
             if (distanceLigne>0)
                 {
                     deplacerElementHaut();
@@ -39,7 +42,7 @@ void robot1G::deplacerRobot(const joueur&j){
                 deplacerElementBas();
             }
         }
-    else
+    if (distanceAbsolueLigne == 0 || distanceAbsolueLigne < distanceAbsolueColonne)
     {
             if (distanceColonne>0)
                 {

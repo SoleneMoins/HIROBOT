@@ -11,9 +11,6 @@ public :
     virtual int type()const=0;
     void affichePosition()const;
     void sauverPosition(std::ostream&ost);
-    bool CollisionRobot(const robot&r);
-    bool CollisionJoueur(const joueur&j);
-    bool CollisionDebris(const debris&d);
 
 
 };

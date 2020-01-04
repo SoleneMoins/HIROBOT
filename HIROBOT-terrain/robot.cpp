@@ -17,31 +17,10 @@ void robot::affichePosition()const{
     std::cout<<positionElement()->numLigne()<<";"<<positionElement()->numColonne()<<std::endl;
 }
 
-/**Verifie s'il y a collision avec le robot
-    @param[in] r-le robot
-    @return si les positions des robots sont les memes
-*/
+void robot::sauverPosition(std::ostream&ost){
 
-bool robot:: CollisionRobot(robot&r){
-    return  positionElement()==r.positionElement();
-}
+    ost<<*positionElement();
 
-/**Verifie s'il y a collision avec le joueur
-    @param[in] j-le joueur
-    @return si les positions du robot et du joueur sont les memes
-*/
-
-bool robot :: CollisionJoueur(joueur&j){
-    return  positionElement()==j.positionElement();
-}
-
-/**Verifie s'il y a collision avec le debris
-    @param[in] d-le debris
-    @return si les positions du robot et du debris sont les memes
-*/
-
-bool robot ::CollisionDebris(debris&d){
-    return  positionElement()==d.positionElement();
 }
 
 /**Affiche la position du robot
