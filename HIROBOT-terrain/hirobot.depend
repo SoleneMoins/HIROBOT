@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1577624001 source:c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\element.cpp
+	"element.h"
+
+1577623966 c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\element.h
+	"position.h"
+
+1577624001 c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\position.h
+	<iostream>
+
+1577624001 source:c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\joueur.cpp
+	"joueur.h"
+
+1577624001 c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\joueur.h
+	<iostream>
+	"element.h"
+
+1577624001 source:c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\joueurexpert.cpp
+	"joueurExpert.h"
+
+1577624001 c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\joueurexpert.h
+	"joueur.h"
+	<iostream>
+
+1514140574 source:c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\main.cpp
+	<iostream>
+
+1577624001 source:c:\users\yayan\desktop\hirobot\hirobot\hirobot-terrain\position.cpp
+	"position.h"
+	"position.h"
+

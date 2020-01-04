@@ -10,6 +10,8 @@ public:
     joueur(position*p,const std::string&nom, int score);
     int score()const;
     void calculScore();
+    std::string nomJoueur()const;
+    int dureeVie()const;
     void augmenterDureeVie();
     void sauverJoueur(std::ostream&ost)const;
     void LireDepuis(std::istream&ist);
