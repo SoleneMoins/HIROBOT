@@ -31,7 +31,7 @@ private :
 
 
     void vueCreer();
-   void paintEvent(QPaintEvent *e);
+    void paintEvent(QPaintEvent *e);
 
 
 

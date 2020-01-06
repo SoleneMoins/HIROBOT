@@ -1,23 +1,17 @@
 
 #include "grille.h"
 
-grille::grille(terrain&t,QWidget *parent):QWidget{parent},d_terrain{t}{
+grille::grille(terrain&t,QWidget *parent):QWidget{parent},d_terrain{t}
+{}
 
 
-}
-
-
-void grille::paintEvent(QPaintEvent *e)
-{
+void grille::paintEvent(QPaintEvent *e) {
 
     QPainter painter(this);
     int left = 0;
     int top = 0;
     int width = 40;
     int height = 40;
-
-
-
 
 
     QBrush brush1("#242424", Qt::SolidPattern);

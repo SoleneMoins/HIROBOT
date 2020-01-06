@@ -3,8 +3,7 @@
 
 #include "mainwindow.h"
 
-mainwindow::mainwindow(terrain&t):d_t{t}, d_win{this}
-{
+mainwindow::mainwindow(terrain&t):d_t{t}, d_win{this} {
     vueCreer(t);
 
 }
@@ -13,14 +12,11 @@ mainwindow::mainwindow(terrain&t):d_t{t}, d_win{this}
 
 void mainwindow::vueCreer(terrain&t){
 
-
-
-
     setWindowTitle("HI ROBOTS");
 
     if(d_t.nbColonne()==0){
         setFixedWidth(maximumWidth());
-    }else{
+    } else {
         setFixedWidth(d_t.nbColonne()*51+138);
     }
 

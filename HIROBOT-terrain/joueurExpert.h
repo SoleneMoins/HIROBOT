@@ -12,14 +12,6 @@ public:
     void deplaceElementHautGauche()=delete;
     void deplaceElementBasDroit()=delete;
     void deplaceElementBasGauche()=delete;
-
-
-
-
-
-
-
-
 };
 
 
