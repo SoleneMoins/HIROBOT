@@ -5,7 +5,7 @@
 robot1G::robot1G():robot{nullptr}
 {}
 
-/**Construction du robot a l'aide d'une position */
+/**Construction du robot à l'aide d'une position */
 robot1G::robot1G(position*p):robot{p}
 {}
 
@@ -28,32 +28,27 @@ void robot1G::deplacerRobot(const joueur&j){
 
     distanceAbsolueColonne = fabs(positionElement()->numColonne()-j.positionElement()->numColonne());
     distanceAbsolueLigne = fabs(positionElement()->numLigne()-j.positionElement()->numLigne());
-
+    // Si le robot est dans la même colonne que le joueur ou que la distance est plus courte verticalement on se déplace sur l'axe vertical
     if (distanceAbsolueColonne == 0 || distanceAbsolueLigne >= distanceAbsolueColonne){
 
-            if (distanceLigne>0)
-                {
-                    deplacerElementHaut();
-
-                }
-            else
-            {
-
-                deplacerElementBas();
-            }
+        if (distanceLigne>0){
+            deplacerElementHaut();
         }
-    if (distanceAbsolueLigne == 0 || distanceAbsolueLigne < distanceAbsolueColonne)
-    {
-            if (distanceColonne>0)
-                {
+        else {
+            deplacerElementBas();
+        }
 
-                    deplacerElementGauche();
-                }
-            else
-            {
+    }
+    // Si le robot est dans la même ligne que le joueur ou que la distance est plus courte horizontalement on se déplace sur l'axe horizontal
+    if (distanceAbsolueLigne == 0 || distanceAbsolueLigne < distanceAbsolueColonne){
 
-                   deplacerElementDroite();
-            }
+        if (distanceColonne>0) {
+            deplacerElementGauche();
+        }
+        else {
+            deplacerElementDroite();
+        }
+
     }
 
 }

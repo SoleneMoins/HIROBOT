@@ -164,7 +164,7 @@ void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
     changerNb();
     d_joueur.Reinitialiser();
     std::vector<int> V(14);
-    V = { 0,0,0,0,0,0,1,0,2,0,3,0,4,0 };
+    V = { 0,4,0,0,0,0,1,0,2,0,0,3,0,0 };
 
     int compteurJoueur = 0, compteurRobot1G = 0, compteurRobot2G = 0, compteurDebris = 0, compteurZero = 0;
 
@@ -194,7 +194,7 @@ void terrain::InitialisationGrille(int nbdebris, int nbRobot1G, int nbRobot2G){
 
             if(compteurZero==(d_nbligne*d_nbcolonne)-(nbdebris+nbRobot1G+nbRobot2G+1)){
 
-                int v = 10;
+                int v = 8;
                 while(v>0){
 
                    suppValeurTab(V,0);
