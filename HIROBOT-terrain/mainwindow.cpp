@@ -206,8 +206,6 @@ void mainwindow::OnPerso(){
     d_t = d_p->terr();
     vueCreer(d_t);
 
-
-
 }
 
 void mainwindow::OnHaut(){
